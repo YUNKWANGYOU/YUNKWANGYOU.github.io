@@ -1,10 +1,3 @@
----
-# the default layout is 'page'
-icon: fas fa-info-circle
-order: 4
----
-
-
 # 늘보의 하루
 
 ![늘보 로고](https://png.pngtree.com/png-vector/20240129/ourmid/pngtree-cute-brown-sloth-png-image_11566692.png)
