@@ -153,7 +153,11 @@ paginate: 10
 baseurl: ""
 
 # ------------ The following options are not recommended to be modified ------------------
-
+content_security_policy:
+  frame-src: "'self'"
+  script-src: "'self' 'unsafe-inline'"
+  style-src: "'self' 'unsafe-inline'"
+  
 kramdown:
   footnote_backlink: "&#8617;&#xfe0e;"
   syntax_highlighter: rouge
