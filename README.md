@@ -1,84 +1,50 @@
-<!-- markdownlint-disable-next-line -->
-<div align="center">
+# 늘보의 하루
 
-  <!-- markdownlint-disable-next-line -->
-  # Chirpy Jekyll Theme
+![늘보 로고](링크를_여기에_넣으세요)
 
-  A minimal, responsive, and feature-rich Jekyll theme for technical writing.
+## 소개
 
-  [![CI](https://img.shields.io/github/actions/workflow/status/cotes2020/jekyll-theme-chirpy/ci.yml?logo=github)][ci]&nbsp;
-  [![Codacy Badge](https://img.shields.io/codacy/grade/4e556876a3c54d5e8f2d2857c4f43894?logo=codacy)][codacy]&nbsp;
-  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=goldenrod)][license]&nbsp;
-  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=orange)][gem]&nbsp;
-  [![Open in Dev Containers](https://img.shields.io/badge/Dev_Containers-Open-deepskyblue?logo=linuxcontainers)][open-container]
+"늘보의 하루"는 나무늘보의 일상과 귀여운 모습을 기록하는 블로그 프로젝트입니다. 느림의 미학을 담은 나무늘보의 세계로 여러분을 초대합니다.
 
-  [**Live Demo** →][demo]
+🌐 [늘보의 하루 방문하기](https://yunkwangyou.github.io/)
 
-  [![Devices Mockup](https://chirpy-img.netlify.app/commons/devices-mockup.png)][demo]
+## 주요 기능
 
-</div>
+- 나무늘보 GIF 모음집
+- 나무늘보에 관한 흥미로운 사실들
+- 일상 속 나무늘보의 모습을 담은 포스트
 
-## Features
+## 카테고리
 
-- Dark Theme
-- Localized UI language
-- Pinned Posts on Home Page
-- Hierarchical Categories
-- Trending Tags
-- Table of Contents
-- Last Modified Date
-- Syntax Highlighting
-- Mathematical Expressions
-- Mermaid Diagrams & Flowcharts
-- Dark Mode Images
-- Embed Media
-- Comment Systems
-- Built-in Search
-- Atom Feeds
-- PWA
-- Web Analytics
-- SEO & Performance Optimization
+- 재미있는 것들
+- 동물
+- (기타 카테고리...)
 
-## Documentation
+## 인기 태그
 
-To learn how to use, develop, and upgrade the project, please refer to the [Wiki][wiki].
+- #gif
+- #귀여움
+- #나무늘보
 
-## Contributing
+## 최근 업데이트
 
-Contributions (_pull requests_, _issues_, and _discussions_) are what make the open-source community such an amazing place
-to learn, inspire, and create. Any contributions you make are greatly appreciated.
-For details, see the "[Contributing Guidelines][contribute-guide]".
+- 나무늘보 모음집
+- Test 포스트
 
-## Credits
+## 기술 스택
 
-### Contributors
+- Jekyll
+- Chirpy 테마
 
-Thanks to [all the contributors][contributors] involved in the development of the project!
+## 기여하기
 
-[![all-contributors](https://contrib.rocks/image?repo=cotes2020/jekyll-theme-chirpy&columns=16)][contributors]
-<sub> — Made with [contrib.rocks](https://contrib.rocks)</sub>
+나무늘보와 관련된 재미있는 콘텐츠나 개선 사항이 있다면 언제든 PR을 보내주세요!
 
-### Third-Party Assets
+## 연락처
 
-This project is built on the [Jekyll][jekyllrb] ecosystem and some [great libraries][lib], and is developed using [VS Code][vscode] as well as tools provided by [JetBrains][jetbrains] under a non-commercial open-source software license.
+- 이메일: your.email@example.com
+- Twitter: [@YourTwitterHandle](https://twitter.com/YourTwitterHandle)
 
-The avatar and favicon for the project's website are from [ClipartMAX][clipartmax].
+## 라이선스
 
-## License
-
-This project is published under [MIT License][license].
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[ci]: https://github.com/cotes2020/jekyll-theme-chirpy/actions/workflows/ci.yml?query=event%3Apush+branch%3Amaster
-[codacy]: https://app.codacy.com/gh/cotes2020/jekyll-theme-chirpy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
-[license]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE
-[open-container]: https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/cotes2020/jekyll-theme-chirpy
-[jekyllrb]: https://jekyllrb.com/
-[clipartmax]: https://www.clipartmax.com/middle/m2i8b1m2K9Z5m2K9_ant-clipart-childrens-ant-cute/
-[demo]: https://cotes2020.github.io/chirpy-demo/
-[wiki]: https://github.com/cotes2020/jekyll-theme-chirpy/wiki
-[contribute-guide]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CONTRIBUTING.md
-[contributors]: https://github.com/cotes2020/jekyll-theme-chirpy/graphs/contributors
-[lib]: https://github.com/cotes2020/chirpy-static-assets
-[vscode]: https://code.visualstudio.com/
-[jetbrains]: https://www.jetbrains.com/?from=jekyll-theme-chirpy
+© 2024 YunKwang You. Some rights reserved.
