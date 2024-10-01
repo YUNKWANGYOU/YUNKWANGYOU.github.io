@@ -80,10 +80,12 @@ tags: [테트리스, HTML5, JavaScript]
         </div>
     </div>
     <div id="video-container">
-        <video id="proposal-video" width="640" height="480" controls>
-            <source src="/assets/img/movie.mp4" type="video/mp4">
-            브라우저가 비디오를 지원하지 않습니다.
-        </video>
+        <iframe id="proposal-video" width="640" height="480" 
+            src="https://www.youtube.com/embed/G-Zfozy7gGI" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
     </div>
 
     <script>
@@ -349,12 +351,10 @@ tags: [테트리스, HTML5, JavaScript]
 
         function showVideo() {
             document.getElementById('video-container').style.display = 'flex';
-            const video = document.getElementById('proposal-video');
-            video.play();
-            video.onended = function() {
-                document.getElementById('video-container').style.display = 'none';
-                update();
-            };
+            // YouTube 동영상은 자동 재생이 되지 않으므로, 이 부분은 제거합니다.
+            // const video = document.getElementById('proposal-video');
+            // video.play();
+            // video.onended 이벤트도 제거합니다.
         }
 
         document.addEventListener('keydown', event => {
