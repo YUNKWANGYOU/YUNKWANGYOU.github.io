@@ -6,7 +6,7 @@
 
 "늘보의 하루"는 나무늘보의 일상과 귀여운 모습을 기록하는 블로그 프로젝트입니다. 느림의 미학을 담은 나무늘보의 세계로 여러분을 초대합니다.
 
-![늘보의 하루 방문하기](https://yunkwangyou.github.io/)
+[Link : https://yunkwangyou.github.io/](https://yunkwangyou.github.io/)
 
 ## 주요 기능
 
