@@ -272,7 +272,7 @@ function update(time = 0) {
     draw(context1, arena1, player1);
     draw(context2, arena2, player2);
 
-    if (player1.score >= 10 || player2.score >= 10) {
+    if (player1.score >= 100 || player2.score >= 100) {
         pauseGame();
         return;
     }
