@@ -26,7 +26,7 @@ jobs:
         run: |
           git config --local user.name "yunkwangyou"
           git config --local user.email "yunkwangyou@github.com"
-          git add _data/schedule.json
+          git add _data/schedule_c2.json
           git commit -m "Update schedule data" || echo "No changes to commit"
           git push
         env:
