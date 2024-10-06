@@ -1,0 +1,33 @@
+name: Fetch WorkInfo
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 매 시간마다 실행 (UTC 기준)
+  workflow_dispatch:  # 수동으로 실행할 수 있는 옵션
+
+jobs:
+  fetch-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Fetch data
+        run: |
+          # 원하는 모듈과 날짜 설정
+          ymod="C1서비스"
+          ydate="ydate"
+          
+          # curl을 사용하여 데이터 가져오기
+          curl -o _data/schedule_c1.json "http://35.209.216.133:5000/ASCH?ymod=${ymod}&ydate=${ydate}"
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "yunkwangyou"
+          git config --local user.email "yunkwangyou@github.com"
+          git add _data/schedule.json
+          git commit -m "Update schedule data" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
