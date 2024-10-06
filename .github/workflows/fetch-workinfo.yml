@@ -15,18 +15,19 @@ jobs:
 
       - name: Fetch data
         run: |
-          # 원하는 모듈과 날짜 설정
-          ymod="C1서비스"
-          ydate="ydate"
-          
-          # curl을 사용하여 데이터 가져오기
-          curl -o _data/schedule_c1.json "http://35.209.216.133:5000/ASCH?ymod=${ymod}&ydate=${ydate}"
+
+          curl -o _data/schedule_c1.json "http://35.209.216.133:5000/ASCH?ymod=C1서비스&ydate=ydate"
+          curl -o _data/schedule_c2_svc.json "http://35.209.216.133:5000/ASCH?ymod=C2서비스&ydate=ydate"
+          curl -o _data/schedule_c2_epc.json "http://35.209.216.133:5000/ASCH?ymod=C2교환&ydate=ydate"
+
 
       - name: Commit and push changes
         run: |
           git config --local user.name "yunkwangyou"
           git config --local user.email "yunkwangyou@github.com"
           git add _data/schedule_c1.json
+          git add _data/schedule_c2_svc.json
+          git add _data/schedule_c2_epc.json
           git commit -m "Update schedule data" || echo "No changes to commit"
           git push
         env:
