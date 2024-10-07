@@ -5,76 +5,126 @@ date: 2024-10-03 15:00:00 +0900
 categories: [업무, 스케줄, 일정, 일정관리]
 tags: [업무, 스케줄, 일정, 일정관리]
 ---
+<style>
+  /* 열 배경색 설정 */
+  .highlight-yellow {
+    background-color: yellow; /* 노란색 */
+  }
+</style>
 
 <div id="schedule">
-  {% assign schedule_c1 = site.data.schedule_c1.data %}
-  {% assign schedule_c2_svc = site.data.schedule_c2_svc.data %}
-  {% assign schedule_c2_epc = site.data.schedule_c2_epc.data %}
+  {% assign schedule_c1_today = site.data.schedule_c1_today.data %}
+  {% assign schedule_c1_next_week = site.data.schedule_c1_next_week.data %}
+  {% assign schedule_c2_svc_today = site.data.schedule_c2_svc_today.data %}
+  {% assign schedule_c2_svc_next_week = site.data.schedule_c2_svc_next_week.data %}
+  {% assign schedule_c2_epc_today = site.data.schedule_c2_epc_today.data %}
+  {% assign schedule_c2_epc_next_week = site.data.schedule_c2_epc_next_week.data %}
   
-  {% assign schedules = "" | split: "" %}  
+  <!-- 이번 주와 다음 주 데이터를 분리하여 저장 -->
+  {% assign schedules_today = "" | split: "" %}
+  {% assign schedules_next_week = "" | split: "" %}
   
-  {% for item in schedule_c1 %}
-    {% assign schedules = schedules | push: item %}
+  {% for item in schedule_c1_today %}
+    {% assign schedules_today = schedules_today | push: item %}
   {% endfor %}
   
-  {% for item in schedule_c2_svc %}
-    {% assign schedules = schedules | push: item %}
+  {% for item in schedule_c1_next_week %}
+    {% assign schedules_next_week = schedules_next_week | push: item %}
   {% endfor %}
   
-  {% for item in schedule_c2_epc %}
-    {% assign schedules = schedules | push: item %}
+  {% for item in schedule_c2_svc_today %}
+    {% assign schedules_today = schedules_today | push: item %}
   {% endfor %}
-
+  
+  {% for item in schedule_c2_svc_next_week %}
+    {% assign schedules_next_week = schedules_next_week | push: item %}
+  {% endfor %}
+  
+  {% for item in schedule_c2_epc_today %}
+    {% assign schedules_today = schedules_today | push: item %}
+  {% endfor %}
+  
+  {% for item in schedule_c2_epc_next_week %}
+    {% assign schedules_next_week = schedules_next_week | push: item %}
+  {% endfor %}
+  
+  <!-- 날짜 행 추출 (첫 번째 행 사용) -->
+  {% assign date_row_today = schedules_today[0] %}
+  {% assign date_row_next_week = schedules_next_week[0] %}
+  
   <table>
     <thead>
       <tr>
-        <th>성명</th>
-        <th>일</th>
-        <th>월</th>
-        <th>화</th>
-        <th>수</th>
-        <th>목</th>
-        <th>금</th>
-        <th>토</th>
+        <th>항목</th>
+        <th>날짜</th>
+        <th>요일</th>
+        {% assign target_names = "유윤광,이재현,양기열" | split: "," %}
+        {% for name in target_names %}
+          {% if name == "유윤광" %}
+            <th class="highlight-yellow">늘보</th> <!-- 노란색 배경 -->
+          {% elsif name == "양기열" %}
+            <th class="highlight-yellow">연어</th> <!-- 노란색 배경 -->
+          {% elsif name == "이재현" %}
+            <th class="highlight-yellow">흑백</th> <!-- 노란색 배경 -->
+          {% endif %}
+        {% endfor %}
       </tr>
     </thead>
     <tbody>
-      {% assign target_names = "유윤광,이재현,양기열" | split: "," %}
-            {% for item in schedule_c1 %}
-        {% if item[1] == "날짜" %}
-          <tr>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td>{{ item[3] }}</td>
-            <td>{{ item[4] }}</td>
-            <td>{{ item[5] }}</td>
-            <td>{{ item[6] }}</td>
-            <td>{{ item[7] }}</td>
-            <td>{{ item[8] }}</td>
-          </tr>
-        {% endif %}
+      <!-- 이번 주 일자별로 요일과 성명별 스케줄 -->
+      {% for i in (2..8) %}
+        <tr>
+          <td>이번주</td>
+          <td>{{ date_row_today[i] }}</td>
+          <td>
+            {% case i %}
+              {% when 2 %} 일
+              {% when 3 %} 월
+              {% when 4 %} 화
+              {% when 5 %} 수
+              {% when 6 %} 목
+              {% when 7 %} 금
+              {% when 8 %} 토
+            {% endcase %}
+          </td>
+          {% for name in target_names %}
+            {% assign today_item = "" %}
+            {% for item in schedules_today %}
+              {% if item[1] == name %}
+                {% assign today_item = item %}
+              {% endif %}
+            {% endfor %}
+            <td class="highlight-yellow">{{ today_item[i] }}</td> <!-- 노란색 배경 -->
+          {% endfor %}
+        </tr>
       {% endfor %}
-      {% for item in schedules %}
-        {% if target_names contains item[1] %}
-          {% assign name = item[1] %}
-          {% if name == "유윤광" %}
-            {% assign name = "늘보" %}
-          {% elsif name == "양기열" %}
-            {% assign name = "연어" %}
-          {% elsif name == "이재현" %}
-            {% assign name = "흑백" %}
-          {% endif %}
-          <tr>
-            <td>{{ name }}</td>
-            <td>{{ item[2] }}</td>
-            <td>{{ item[3] }}</td>
-            <td>{{ item[4] }}</td>
-            <td>{{ item[5] }}</td>
-            <td>{{ item[6] }}</td>
-            <td>{{ item[7] }}</td>
-            <td>{{ item[8] }}</td>
-          </tr>
-        {% endif %}
+      
+      <!-- 다음 주 일자별로 요일과 성명별 스케줄 -->
+      {% for i in (2..8) %}
+        <tr>
+          <td>다음주</td>
+          <td>{{ date_row_next_week[i] }}</td>
+          <td>
+            {% case i %}
+              {% when 2 %} 일
+              {% when 3 %} 월
+              {% when 4 %} 화
+              {% when 5 %} 수
+              {% when 6 %} 목
+              {% when 7 %} 금
+              {% when 8 %} 토
+            {% endcase %}
+          </td>
+          {% for name in target_names %}
+            {% assign next_week_item = "" %}
+            {% for item in schedules_next_week %}
+              {% if item[1] == name %}
+                {% assign next_week_item = item %}
+              {% endif %}
+            {% endfor %}
+            <td class="highlight-yellow">{{ next_week_item[i] }}</td> <!-- 노란색 배경 -->
+          {% endfor %}
+        </tr>
       {% endfor %}
     </tbody>
   </table>
