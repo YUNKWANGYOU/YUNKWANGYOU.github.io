@@ -15,7 +15,7 @@ jobs:
 
       - name: Fetch data
         run: |
-# 오늘 날짜와 다음 주 날짜 계산
+          # 오늘 날짜와 다음 주 날짜 계산
           today=$(date +%Y-%m-%d)
           next_week=$(date -d "+7 days" +%Y-%m-%d)
 
@@ -33,9 +33,12 @@ jobs:
         run: |
           git config --local user.name "yunkwangyou"
           git config --local user.email "yunkwangyou@github.com"
-          git add _data/schedule_c1.json
-          git add _data/schedule_c2_svc.json
-          git add _data/schedule_c2_epc.json
+          git add _data/schedule_c1_today.json
+          git add _data/schedule_c2_svc_today.json
+          git add _data/schedule_c2_epc_today.json
+          git add _data/schedule_c1_next_week.json
+          git add _data/schedule_c2_svc_next_week.json
+          git add _data/schedule_c2_epc_next_week.json
           git commit -m "Update schedule data" || echo "No changes to commit"
           git push
         env:
