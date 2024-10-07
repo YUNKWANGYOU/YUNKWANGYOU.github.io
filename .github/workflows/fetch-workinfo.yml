@@ -15,12 +15,20 @@ jobs:
 
       - name: Fetch data
         run: |
+# 오늘 날짜와 다음 주 날짜 계산
+          today=$(date +%Y-%m-%d)
+          next_week=$(date -d "+7 days" +%Y-%m-%d)
 
-          curl -o _data/schedule_c1.json "http://35.209.216.133:5000/ASCH?ymod=C1%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=ydate"
-          curl -o _data/schedule_c2_svc.json "http://35.209.216.133:5000/ASCH?ymod=C2%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=ydate"
-          curl -o _data/schedule_c2_epc.json "http://35.209.216.133:5000/ASCH?ymod=C2%EA%B5%90%ED%99%98&ydate=ydate"
+          # 오늘 날짜 데이터
+          curl -o _data/schedule_c1_today.json "http://35.209.216.133:5000/ASCH?ymod=C1%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$today"
+          curl -o _data/schedule_c2_svc_today.json "http://35.209.216.133:5000/ASCH?ymod=C2%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$today"
+          curl -o _data/schedule_c2_epc_today.json "http://35.209.216.133:5000/ASCH?ymod=C2%EA%B5%90%ED%99%98&ydate=$today"
 
-
+          # 다음 주 날짜 데이터
+          curl -o _data/schedule_c1_next_week.json "http://35.209.216.133:5000/ASCH?ymod=C1%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$next_week"
+          curl -o _data/schedule_c2_svc_next_week.json "http://35.209.216.133:5000/ASCH?ymod=C2%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$next_week"
+          curl -o _data/schedule_c2_epc_next_week.json "http://35.209.216.133:5000/ASCH?ymod=C2%EA%B5%90%ED%99%98&ydate=$next_week"
+          
       - name: Commit and push changes
         run: |
           git config --local user.name "yunkwangyou"

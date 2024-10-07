@@ -11,7 +11,7 @@ tags: [업무, 스케줄, 일정, 일정관리]
   {% assign schedule_c2_svc = site.data.schedule_c2_svc.data %}
   {% assign schedule_c2_epc = site.data.schedule_c2_epc.data %}
   
-  {% assign schedules = "" | split: "" %} 
+  {% assign schedules = "" | split: "" %}  
   
   {% for item in schedule_c1 %}
     {% assign schedules = schedules | push: item %}
@@ -40,6 +40,20 @@ tags: [업무, 스케줄, 일정, 일정관리]
     </thead>
     <tbody>
       {% assign target_names = "유윤광,이재현,양기열" | split: "," %}
+            {% for item in schedule_c1 %}
+        {% if item[1] == "날짜" %}
+          <tr>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+            <td>{{ item[4] }}</td>
+            <td>{{ item[5] }}</td>
+            <td>{{ item[6] }}</td>
+            <td>{{ item[7] }}</td>
+            <td>{{ item[8] }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
       {% for item in schedules %}
         {% if target_names contains item[1] %}
           {% assign name = item[1] %}
