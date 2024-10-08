@@ -8,8 +8,14 @@ tags: [업무, 스케줄, 일정, 일정관리]
 <style>
   /* 열 배경색 설정 */
   .highlight-yellow {
-    background-color: yellow; /* 노란색 */
+    background-color: rgb(255, 255, 215); /* 노란색 */
   }
+  #schedule table {
+    margin: 0 auto; /* 테이블을 가운데 정렬 */
+    font-size: 1.2em; /* 폰트 크기 조정 */
+
+  }
+</st
 </style>
 
 <div id="schedule">
@@ -94,7 +100,19 @@ tags: [업무, 스케줄, 일정, 일정관리]
                 {% assign today_item = item %}
               {% endif %}
             {% endfor %}
-            <td class="highlight-yellow">{{ today_item[i] }}</td> <!-- 노란색 배경 -->
+              <td class="highlight-yellow">
+                {% if today_item[i] contains "작" or today_item[i] contains "집작" or today_item[i] contains "상집" or today_item[i] contains "작검" or today_item[i] contains "교" or today_item[i] contains "출" or today_item[i] contains "◎" or today_item[i] contains "T" %}
+                  🌞
+                {% elsif today_item[i] contains "◑" or today_item[i] contains "◑상" or today_item[i] contains "●" or today_item[i] contains "상●" %}
+                  <span style="background-color: black; color: white; border-radius: 50%;">⭐️</span>
+                {% elsif today_item[i] contains "○휴" or today_item[i] contains "/" or today_item[i] contains "※" %}
+                  🦥
+                {% elsif today_item[i] contains "휴" %}
+                  <span style="background-color: red; color: white; border-radius: 50%;">🦥</span>
+                {% else %}
+                  {{ today_item[i] }}
+                {% endif %}
+              </td>  <!-- 노란색 배경 -->    
           {% endfor %}
         </tr>
       {% endfor %}
@@ -122,10 +140,42 @@ tags: [업무, 스케줄, 일정, 일정관리]
                 {% assign next_week_item = item %}
               {% endif %}
             {% endfor %}
-            <td class="highlight-yellow">{{ next_week_item[i] }}</td> <!-- 노란색 배경 -->
-          {% endfor %}
+                <td class="highlight-yellow">
+                  {% if today_item[i] contains "작" or today_item[i] contains "집작" or today_item[i] contains "상집" or today_item[i] contains "작검" or today_item[i] contains "교" or today_item[i] contains "출" or today_item[i] contains "◎" or today_item[i] contains "T" %}
+                    🌞
+                  {% elsif today_item[i] contains "◑" or today_item[i] contains "◑상" or today_item[i] contains "●" or today_item[i] contains "상●" %}
+                    <span style="background-color: black; color: white; border-radius: 50%;">⭐️</span>
+                  {% elsif today_item[i] contains "○휴" or today_item[i] contains "/" or today_item[i] contains "※" %}
+                    🦥
+                  {% elsif today_item[i] contains "휴" %}
+                    <span style="background-color: red; color: white; border-radius: 50%;">🦥</span>
+                  {% else %}
+                    {{ today_item[i] }}
+                  {% endif %}
+                </td>  <!-- 노란색 배경 -->          {% endfor %}
         </tr>
       {% endfor %}
     </tbody>
   </table>
+</div>
+
+<div style="margin: 20px; font-family: Arial, sans-serif;">
+  <ul style="list-style-type: none; padding: 0; display: flex; justify-content: center; flex-wrap: wrap;">
+    <li style="margin: 10px; text-align: center;">
+      <span style="font-size: 40px; background-color: black; color: white; padding: 5px; border-radius: 50%;">⭐️</span>
+      <p style="font-size: 18px; color: #555;">야간근무</p>
+    </li>
+    <li style="margin: 10px; text-align: center;">
+      <span style="font-size: 40px;">🌞</span>
+      <p style="font-size: 18px; color: #555;">주간근무</p>
+    </li>
+    <li style="margin: 10px; text-align: center;">
+      <span style="font-size: 40px;">🦥</span>
+      <p style="font-size: 18px; color: #555;">휴일</p>
+    </li>
+    <li style="margin: 10px; text-align: center;">
+      <span style="font-size: 40px; background-color: red; color: white; padding: 5px; border-radius: 50%;">🦥</span>
+      <p style="font-size: 18px; color: #555;">휴가</p>
+    </li>
+  </ul>
 </div>

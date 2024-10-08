@@ -18,6 +18,8 @@ jobs:
           # 오늘 날짜와 다음 주 날짜 계산
           today=$(date +%Y-%m-%d)
           next_week=$(date -d "+7 days" +%Y-%m-%d)
+          next_two_week=$(date -d "+14 days" +%Y-%m-%d)
+          next_three_week=$(date -d "+21 days" +%Y-%m-%d)
 
           # 오늘 날짜 데이터
           curl -o _data/schedule_c1_today.json "http://35.209.216.133:5000/ASCH?ymod=C1%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$today"
@@ -29,6 +31,17 @@ jobs:
           curl -o _data/schedule_c2_svc_next_week.json "http://35.209.216.133:5000/ASCH?ymod=C2%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$next_week"
           curl -o _data/schedule_c2_epc_next_week.json "http://35.209.216.133:5000/ASCH?ymod=C2%EA%B5%90%ED%99%98&ydate=$next_week"
           
+          # 다다음 주 날짜 데이터
+          curl -o _data/schedule_c1_next_two_week.json "http://35.209.216.133:5000/ASCH?ymod=C1%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$next_two_week"
+          curl -o _data/schedule_c2_svc_next_two_week.json "http://35.209.216.133:5000/ASCH?ymod=C2%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$next_two_week"
+          curl -o _data/schedule_c2_epc_next_two_week.json "http://35.209.216.133:5000/ASCH?ymod=C2%EA%B5%90%ED%99%98&ydate=$next_two_week"
+          
+          # 다다다음 주 날짜 데이터
+          curl -o _data/schedule_c1_next_three_week.json "http://35.209.216.133:5000/ASCH?ymod=C1%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$next_three_week"
+          curl -o _data/schedule_c2_svc_next_three_week.json "http://35.209.216.133:5000/ASCH?ymod=C2%EC%84%9C%EB%B9%84%EC%8A%A4&ydate=$next_three_week"
+          curl -o _data/schedule_c2_epc_next_three_week.json "http://35.209.216.133:5000/ASCH?ymod=C2%EA%B5%90%ED%99%98&ydate=$next_three_week"
+          
+
       - name: Commit and push changes
         run: |
           git config --local user.name "yunkwangyou"
@@ -39,6 +52,13 @@ jobs:
           git add _data/schedule_c1_next_week.json
           git add _data/schedule_c2_svc_next_week.json
           git add _data/schedule_c2_epc_next_week.json
+          git add _data/schedule_c1_next_two_week.json
+          git add _data/schedule_c2_svc_next_two_week.json
+          git add _data/schedule_c2_epc_next_two_week.json
+          git add _data/schedule_c1_next_three_week.json
+          git add _data/schedule_c2_svc_next_three_week.json
+          git add _data/schedule_c2_epc_next_three_week.json
+          
           git commit -m "Update schedule data" || echo "No changes to commit"
           git push
         env:
