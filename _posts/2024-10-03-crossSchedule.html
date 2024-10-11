@@ -127,8 +127,10 @@ tags: [업무, 스케줄, 일정, 일정관리]
       {% assign lazy_conditions = "○휴,/,※" | split: "," %}
       {% assign holiday_conditions = "휴,○4/반,R,○4반" | split: "," %}
 
-      {% assign today_date = 'now' | date: '%m%d' %}
-
+      {% assign utc_time = 'now' | date: '%s' | plus: 0 %}
+      {% assign kst_time = utc_time | plus: 32400 %}
+      {% assign today_date = kst_time | date: '%m%d' %}
+      
       <!-- 이번 주 일자별로 요일과 성명별 스케줄 -->
       {% for i in (2..8) %}
       {% assign current_date = date_row_today[i] %}
