@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Core운용1팀 겹치는 시간표 찾기"
+title: "코코아☕️  겹치는 시간표 찾기"
 date: 2024-10-11 15:00:00 +0900
 categories: [업무, 스케줄, 일정, 일정관리]
 tags: [업무, 스케줄, 일정, 일정관리]
@@ -18,9 +18,25 @@ tags: [업무, 스케줄, 일정, 일정관리]
     font-size: 1.2em; /* 폰트 크기 조정 */
 
   }
+  /* 오늘 날짜 행 하이라이트 스타일 추가 */
+  .today-highlight {
+    background-color: #ffcccc !important; /* 연한 빨간색 */
+    font-weight: bold;
+  }
 </style>
 
 <div id="schedule">
+
+  {% assign schedule_c1_epc_today = site.data.schedule_c1_epc_today.data %}
+  {% assign schedule_c1_epc_next_week = site.data.schedule_c1_epc_next_week.data %}
+  {% assign schedule_c1_epc_next_two_week = site.data.schedule_c1_epc_next_two_week.data %}
+  {% assign schedule_c1_epc_next_three_week = site.data.schedule_c1_epc_next_three_week.data %}
+
+  {% assign schedule_c1_etc_today = site.data.schedule_c1_etc_today.data %}
+  {% assign schedule_c1_etc_next_week = site.data.schedule_c1_etc_next_week.data %}
+  {% assign schedule_c1_etc_next_two_week = site.data.schedule_c1_etc_next_two_week.data %}
+  {% assign schedule_c1_etc_next_three_week = site.data.schedule_c1_etc_next_three_week.data %}
+
   {% assign schedule_c1_svc_today = site.data.schedule_c1_svc_today.data %}
   {% assign schedule_c1_svc_next_week = site.data.schedule_c1_svc_next_week.data %}
   {% assign schedule_c1_svc_next_two_week = site.data.schedule_c1_svc_next_two_week.data %}
@@ -43,6 +59,37 @@ tags: [업무, 스케줄, 일정, 일정관리]
   {% assign schedules_next_two_week = "" | split: "" %}
   {% assign schedules_next_three_week = "" | split: "" %}
 
+  {% for item in schedule_c1_epc_today %}
+    {% assign schedules_today = schedules_today | push: item %}
+  {% endfor %}
+  
+  {% for item in schedule_c1_epc_next_week %}
+    {% assign schedules_next_week = schedules_next_week | push: item %}
+  {% endfor %}
+
+  {% for item in schedule_c1_epc_next_two_week %}
+    {% assign schedules_next_two_week = schedules_next_two_week | push: item %}
+  {% endfor %}
+  
+  {% for item in schedule_c1_epc_next_three_week %}
+    {% assign schedules_next_three_week = schedules_next_three_week | push: item %}
+  {% endfor %}
+
+  {% for item in schedule_c1_etc_today %}
+    {% assign schedules_today = schedules_today | push: item %}
+  {% endfor %}
+  
+  {% for item in schedule_c1_etc_next_week %}
+    {% assign schedules_next_week = schedules_next_week | push: item %}
+  {% endfor %}
+
+  {% for item in schedule_c1_etc_next_two_week %}
+    {% assign schedules_next_two_week = schedules_next_two_week | push: item %}
+  {% endfor %}
+  
+  {% for item in schedule_c1_etc_next_three_week %}
+    {% assign schedules_next_three_week = schedules_next_three_week | push: item %}
+  {% endfor %}
   
   {% for item in schedule_c1_svc_today %}
     {% assign schedules_today = schedules_today | push: item %}
@@ -105,26 +152,33 @@ tags: [업무, 스케줄, 일정, 일정관리]
         <th>항목</th>
         <th>날짜</th>
         <th>요일</th>
-        {% assign target_names = "유윤광,이재현,양기열" | split: "," %}
+        {% assign target_names = "유윤광,신하람,우승제,조현재,이정필,고수빈,양동준,정대건,이무빈" | split: "," %}
         {% for name in target_names %}
-          {% if name == "유윤광" %}
-            <th>늘보🦥</th> <!-- 노란색 배경 -->
-          {% elsif name == "양기열" %}
-            <th>연어🍣</th> <!-- 노란색 배경 -->
-          {% elsif name == "이재현" %}
-            <th>흑백🌗</th> <!-- 노란색 배경 -->
-          {% endif %}
+          {% case name %}
+            {% when "유윤광" %}
+              <th>늘보🦥</th>
+            {% when "양기열" %}
+              <th>연어🍣</th>
+            {% when "이재현" %}
+              <th>흑백🌗</th>
+            {% else %}
+              <th>{{ name }}</th>
+          {% endcase %}
         {% endfor %}
       </tr>
     </thead>
     <tbody>
-      {% assign sunny_conditions = "○,작,집작,상집,작검,교,출,◎,상◎,상○,T,집,인" | split: "," %}
+      {% assign sunny_conditions = "○,작,집작,상집,작검,교,출,◎,상◎,상○,T,집,인,○4,상,작업,작업4,집수" | split: "," %}
       {% assign star_conditions = "◑,상◑,●,상●" | split: "," %}
       {% assign lazy_conditions = "○휴,/,※" | split: "," %}
-      {% assign holiday_conditions = "휴,○4/반" | split: "," %}
+      {% assign holiday_conditions = "휴,○4/반,R,○4반" | split: "," %}
+
+      {% assign today_date = 'now' | date: '%m%d' %}
+
       <!-- 이번 주 일자별로 요일과 성명별 스케줄 -->
       {% for i in (2..8) %}
-        <tr>
+        {% assign current_date = date_row_today[i] %}
+        <tr class="{% if current_date == today_date %}today-highlight{% endif %}">
           <td>이번주</td>
           <td>{{ date_row_today[i] }}</td>
           <td>
@@ -193,7 +247,8 @@ tags: [업무, 스케줄, 일정, 일정관리]
       
       <!-- 다음 주 일자별로 요일과 성명별 스케줄 -->
       {% for i in (2..8) %}
-        <tr>
+        {% assign current_date = date_row_next_week[i] %}
+        <tr class="{% if current_date == today_date %}today-highlight{% endif %}">
           <td>다음주</td>
           <td>{{ date_row_next_week[i] }}</td>
           <td>
@@ -261,7 +316,8 @@ tags: [업무, 스케줄, 일정, 일정관리]
       {% endfor %}
 
       {% for i in (2..8) %}
-        <tr>
+        {% assign current_date = date_row_next_two_week[i] %}
+        <tr class="{% if current_date == today_date %}today-highlight{% endif %}">
           <td>2주 뒤</td>
           <td>{{ date_row_next_two_week[i] }}</td>
           <td>
@@ -329,7 +385,8 @@ tags: [업무, 스케줄, 일정, 일정관리]
       {% endfor %}
 
       {% for i in (2..8) %}
-        <tr>
+        {% assign current_date = date_row_next_three_week[i] %}
+        <tr class="{% if current_date == today_date %}today-highlight{% endif %}">
           <td>3주 뒤</td>
           <td>{{ date_row_next_three_week[i] }}</td>
           <td>
@@ -581,7 +638,7 @@ tags: [업무, 스케줄, 일정, 일정관리]
   <h2 style="color: #333; text-align: center;">공통 모임 가능일</h2>
   <p style="text-align: center; color: #666;">
     다음은 모든 팀원이 함께 만날 수 있는 날짜입니다:<br>
-    (주말, 휴가(빨간색 배경 🦥), 야간근무(⭐️) 제외)
+    (휴가(빨간색 배경 🦥), 야간근무(⭐️) 제외)
 
   <h2 style="color: #333; text-align: center; margin-top: 30px;">일치하는 날짜</h2>
   <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center;">
