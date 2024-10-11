@@ -638,15 +638,32 @@ tags: [업무, 스케줄, 일정, 일정관리]
   <h2 style="color: #333; text-align: center;">공통 모임 가능일</h2>
   <p style="text-align: center; color: #666;">
     다음은 모든 팀원이 함께 만날 수 있는 날짜입니다:<br>
-    (휴가(빨간색 배경 🦥), 야간근무(⭐️) 제외)
+    (공휴일(한국기준), 주말, 휴가(빨간색 배경 🦥), 야간근무(⭐️) 제외)
 
   <h2 style="color: #333; text-align: center; margin-top: 30px;">일치하는 날짜</h2>
+  {% assign holidays_2024 = "0101,0209,0210,0211,0301,0410,0501,0506,0515,0606,0815,0916,0917,0918,1003,1009,1225" | split: "," %}
   <ul style="list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center;">
     {% assign dates_array = matching_dates | split: ',' %}
     {% for date in dates_array %}
-      <li style="margin: 5px 10px; padding: 5px 10px; background-color: rgb(255, 255, 155); color: rgb(100,100,100); border-radius: 5px;">
-        {{ date | strip }}
-      </li>
+      {% assign stripped_date = date | strip %}
+      {% assign month = stripped_date | slice: 0, 2 %}
+      {% assign day = stripped_date | slice: 2, 2 %}
+      {% assign full_date = "2024-" | append: month | append: "-" | append: day %}
+      {% assign day_of_week = full_date | date: "%u" | plus: 0 %}
+      
+      {% assign is_holiday = false %}
+      {% for holiday in holidays_2024 %}
+        {% if holiday == stripped_date %}
+          {% assign is_holiday = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      
+      {% if day_of_week < 6 and is_holiday == false %}
+        <li style="margin: 5px 10px; padding: 5px 10px; background-color: rgb(255, 255, 155); color: rgb(100,100,100); border-radius: 5px;">
+          {{ stripped_date }}
+        </li>
+      {% endif %}
     {% endfor %}
   </ul>
 </div>
