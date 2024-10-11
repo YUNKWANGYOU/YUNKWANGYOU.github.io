@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Core운용1팀 주니어 공통 가능일정 찾기"
+title: "Core운용1팀 겹치는 시간표 찾기"
 date: 2024-10-11 15:00:00 +0900
 categories: [업무, 스케줄, 일정, 일정관리]
 tags: [업무, 스케줄, 일정, 일정관리]
@@ -21,10 +21,10 @@ tags: [업무, 스케줄, 일정, 일정관리]
 </style>
 
 <div id="schedule">
-  {% assign schedule_c1_today = site.data.schedule_c1_today.data %}
-  {% assign schedule_c1_next_week = site.data.schedule_c1_next_week.data %}
-  {% assign schedule_c1_next_two_week = site.data.schedule_c1_next_two_week.data %}
-  {% assign schedule_c1_next_three_week = site.data.schedule_c1_next_three_week.data %}
+  {% assign schedule_c1_svc_today = site.data.schedule_c1_svc_today.data %}
+  {% assign schedule_c1_svc_next_week = site.data.schedule_c1_svc_next_week.data %}
+  {% assign schedule_c1_svc_next_two_week = site.data.schedule_c1_svc_next_two_week.data %}
+  {% assign schedule_c1_svc_next_three_week = site.data.schedule_c1_svc_next_three_week.data %}
 
   {% assign schedule_c2_svc_today = site.data.schedule_c2_svc_today.data %}
   {% assign schedule_c2_svc_next_week = site.data.schedule_c2_svc_next_week.data %}
@@ -44,19 +44,19 @@ tags: [업무, 스케줄, 일정, 일정관리]
   {% assign schedules_next_three_week = "" | split: "" %}
 
   
-  {% for item in schedule_c1_today %}
+  {% for item in schedule_c1_svc_today %}
     {% assign schedules_today = schedules_today | push: item %}
   {% endfor %}
   
-  {% for item in schedule_c1_next_week %}
+  {% for item in schedule_c1_svc_next_week %}
     {% assign schedules_next_week = schedules_next_week | push: item %}
   {% endfor %}
 
-  {% for item in schedule_c1_next_two_week %}
+  {% for item in schedule_c1_svc_next_two_week %}
     {% assign schedules_next_two_week = schedules_next_two_week | push: item %}
   {% endfor %}
   
-  {% for item in schedule_c1_next_three_week %}
+  {% for item in schedule_c1_svc_next_three_week %}
     {% assign schedules_next_three_week = schedules_next_three_week | push: item %}
   {% endfor %}
 
